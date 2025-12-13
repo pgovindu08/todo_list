@@ -1,0 +1,15 @@
+.wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.button{
+  background-color: orange;
+  padding: 7.5px;
+  font-size: 25px;
+  border-radius: 30px;
+  font-family: Times New Roman;
+}
