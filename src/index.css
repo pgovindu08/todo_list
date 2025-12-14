@@ -4,6 +4,8 @@
   align-items: center;
   text-align: center;
   gap: 10px;
+  background-color: cyan;
+  height: 100px;
 }
 
 .button{
@@ -12,4 +14,17 @@
   font-size: 25px;
   border-radius: 30px;
   font-family: Times New Roman;
+}
+
+.section{
+  width: 400px;
+  height: 400px;
+  background-color: lightblue;
+  border-radius: 10px;
+  padding: 20px;
+  float: left;
+}
+
+.section p{
+  font-family: 'verdana';
 }
