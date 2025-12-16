@@ -1,4 +1,5 @@
 import Button from './Button.jsx'
+import NewSection from './NewSection.jsx'
 import Section from './Section.jsx'
 
 function App() {
@@ -7,8 +8,6 @@ function App() {
     <>
       <title>To Do List App</title>
       <Button></Button>
-      <Section></Section>
-      <Section></Section>
       <Section></Section>
     </>
   )
