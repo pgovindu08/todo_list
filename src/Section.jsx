@@ -3,28 +3,35 @@ import './section.css'
 
 function Section(){
     
-    const [task, setTask] = useState("");
+    const [tasks, setTasks] = useState([]);
 
-    function handleTaskChange(event){
-        setTask(event.target.value);
+    function addTask(event){
+        const newTask = document.getElementById("taskInput").value;
+        document.getElementById("taskInput").value = "";
+        setTasks([...tasks, newTask]);
+        
     }
 
-    const resetTask = () => {
-        setTask("");
+    function removeTask(index){
+        setTasks(tasks.filter((__,i) => i != index));
     }
 
     return(
-        <div className="section">
-            <h2>Courses</h2>
-            <div className='task-heading'>
-                <input type='checkbox'></input> 
-                <p>{task}</p>
+        <>
+            <div className="section">
+                <h2>Courses</h2>
+                <div>
+                    {tasks.map((task, index) => 
+                    <ul>
+                        <input type='checkbox' key={index} onClick={() => removeTask(index)}/>
+                        {task}
+                    </ul>)}
+                </div>
+                <input type='text' id='taskInput' placeholder='Enter your task'/>
+                <button onClickCapture={addTask} id='taskAdd'>Add Task</button>
             </div>
-            <div>
-                <input value={task} onChange={handleTaskChange}></input>
-                <button onClick={resetTask}>New Task</button>
-            </div>
-        </div>
+        </>
+        
     );
 }
 export default Section
