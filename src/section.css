@@ -1,17 +1,55 @@
 .section{
-  width: 400px;
-  height: 400px;
+  width: 515px;
+  height: 600px;
   background-color: lightblue;
   border-radius: 10px;
   padding: 20px;
   float: left;
+  margin-right: 10px;
+  margin-top: 10px;
+  overflow: auto;
+  resize: both;
 }
 .section p{
   font-family: 'verdana';
 }
 .task-heading{
-    display: flex;
-    flex-direction: row;
-    align-items: left;
-    justify-content: left;
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: left;
+}
+input[type="text"]{
+  width: 20rem;
+  height: 1.7rem;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.add-task{
+  height: 2rem;
+  font-family: monospace;
+  margin-left: 5px;
+  background-color: green;
+  color: white;
+}
+.add-button{
+  height: 2rem;
+  font-family: monospace;
+  margin-left: 20px;
+  background-color: green;
+  color: white;
+  width: 10rem;
+}
+.check-button{
+  font-size: 1rem;
+  padding: 0px;
+  margin-right: 10px;
+}
+.tasks-list{
+  font-size: 1rem;
+}
+.tasks-container{
+  background-color: bisque;
+  padding: 5px 5px;
+  border-radius: 10px;
 }

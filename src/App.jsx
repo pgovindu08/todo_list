@@ -1,16 +1,14 @@
-import Button from './Button.jsx'
-import NewSection from './NewSection.jsx'
-import Section from './Section.jsx'
+import { useState } from "react";
+import Section from "./Section";
+import Button from "./Button.jsx"
+import "./App.css"
 
 function App() {
-
   return (
     <>
-      <title>To Do List App</title>
       <Button></Button>
-      <Section></Section>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,14 +1,24 @@
-import {Routes, Route} from 'react-router-dom'
+import React, {useState, useEffect} from 'react';
 import Section from './Section';
 
 function Button(){
+    
+    const [sections, setSections] = useState([]); // array of sections
+    
+    function handleClick() {
+        setSections([...sections, {}]); // push a new section
+    }
+
     return(
         <>
-            <div className="wrapper">
+            <nav className='button holder'>
                 <button className="button">Home</button>
-                <button className="button">New Section</button>
+                <button onClick={handleClick} className="button">Add Section</button>
+                {sections.map((_, index) => (
+                    <Section key={index} />  // render a Section for each array element
+                ))}
                 <button className="button">About</button>
-            </div>
+            </nav>
         </>
     );
 }
