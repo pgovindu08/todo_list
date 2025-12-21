@@ -1,38 +1,43 @@
-.section{
+.section {
   width: 515px;
   height: 600px;
   background-color: lightblue;
   border-radius: 10px;
   padding: 20px;
-  float: left;
+  /* float: left; Removed to support flex layout */
   margin-right: 10px;
   margin-top: 10px;
   overflow: auto;
   resize: both;
 }
-.section p{
+
+.section p {
   font-family: 'verdana';
 }
-.task-heading{
+
+.task-heading {
   display: flex;
   flex-direction: row;
   align-items: left;
   justify-content: left;
 }
-input[type="text"]{
+
+input[type="text"] {
   width: 20rem;
   height: 1.7rem;
   margin-bottom: 10px;
   margin-top: 10px;
 }
-.add-task{
+
+.add-task {
   height: 2rem;
   font-family: monospace;
-  margin-left: 5px;
+  margin-left: 20px;
   background-color: green;
   color: white;
 }
-.add-button{
+
+.add-button {
   height: 2rem;
   font-family: monospace;
   margin-left: 20px;
@@ -40,16 +45,35 @@ input[type="text"]{
   color: white;
   width: 10rem;
 }
-.check-button{
+
+.check-button {
   font-size: 1rem;
   padding: 0px;
   margin-right: 10px;
 }
-.tasks-list{
+
+.tasks-list {
   font-size: 1rem;
 }
-.tasks-container{
+
+.tasks-list {
   background-color: bisque;
   padding: 5px 5px;
+  margin-bottom: 10px;
   border-radius: 10px;
+}
+
+.delete-section-button {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.delete-section-button:hover {
+  background-color: #cc0000;
 }

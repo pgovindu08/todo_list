@@ -1,24 +1,34 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Section from './Section';
+import './index.css';
 
-function Button(){
-    
+function Button() {
+
     const [sections, setSections] = useState([]); // array of sections
-    
+
+    // Fix for stale state: Ensure all sections have an ID
+    useEffect(() => {
+        setSections(prev => prev.map(s => s.id ? s : { ...s, id: Math.random().toString(36) + Date.now().toString(36) }));
+    }, []);
+
     function handleClick() {
-        setSections([...sections, {}]); // push a new section
+        setSections([...sections, { id: Math.random().toString(36) + Date.now().toString(36) }]); // push a new section with unique ID
     }
 
-    return(
+    function deleteSection(id) {
+        setSections(sections.filter(section => section.id !== id));
+    }
+
+    return (
         <>
-            <nav className='button holder'>
-                <button className="button">Home</button>
-                <button onClick={handleClick} className="button">Add Section</button>
-                {sections.map((_, index) => (
-                    <Section key={index} />  // render a Section for each array element
+            <div className='menu-bar'>
+                <button onClick={handleClick} className="menu-button">Add Section</button>
+            </div>
+            <div className='sections-display'>
+                {sections.map((section) => (
+                    <Section key={section.id} onDelete={() => deleteSection(section.id)} />
                 ))}
-                <button className="button">About</button>
-            </nav>
+            </div>
         </>
     );
 }
