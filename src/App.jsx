@@ -6,8 +6,8 @@ import "./App.css"
 function App() {
   return (
     <>
-      <div>
-        <Button></Button>
+      <div className="app-root">
+        <Button />
       </div>
     </>
   );

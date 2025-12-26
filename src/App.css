@@ -1,7 +1,12 @@
-.section-button{
-    font-size: 1.5rem;
-    background-color: orange;
-    border-radius: 10px;
-    padding: 10px 10px;
-    align-items: center;
+.app-root {
+  max-width: 95vw;
+  margin: 0 auto;
+}
+
+.section-button {
+  font-size: 1.5rem;
+  background-color: orange;
+  border-radius: 10px;
+  padding: 10px 10px;
+  align-items: center;
 }

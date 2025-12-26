@@ -1,56 +1,150 @@
-import React, { useState } from 'react'
-import './section.css'
+import React, { useState, useEffect } from 'react';
+import './section.css';
 
-function Section({ onDelete }) {
+function Section({
+  section,
+  onDelete,
+  onAddTask,
+  onRemoveTask,
+  onMoveTaskUp,
+  onMoveTaskDown,
+  onRenameSection,
+}) {
+  const [task, setTask] = useState('');
+  const [taskDate, setTaskDate] = useState('');
+  const [draftSection, setDraftSection] = useState(section.title || '');
 
-    const [tasks, setTasks] = useState([]);
-    const [task, setTask] = useState("");
-    const [section, setSection] = useState("");
-    const [draftSection, setDraftSection] = useState("");
+  useEffect(() => {
+    setDraftSection(section.title || '');
+  }, [section.title]);
 
-    function addTask(event) {
-        setTask(event.target.value);
+  function handleTaskChange(event) {
+    setTask(event.target.value);
+  }
+
+  function handleDateChange(event) {
+    setTaskDate(event.target.value);
+  }
+
+  function addTaskButton() {
+    const trimmed = task.trim();
+    if (!trimmed) return;
+
+    onAddTask(section.id, trimmed, taskDate || null);
+    setTask('');
+    setTaskDate('');
+  }
+
+  function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      addTaskButton();
     }
+  }
 
-    function addTaskButton() {
-        setTasks([...tasks, task]);
-        setTask("");
-    }
+  function handleRenameChange(event) {
+    setDraftSection(event.target.value);
+  }
 
-    function removeTask(index) {
-        setTasks(tasks.filter((__, i) => i != index));
-    }
+  function handleRenameClick() {
+    const title = draftSection.trim() || 'Untitled Section';
+    onRenameSection(section.id, title);
+  }
 
-    function renameSection(event) {
-        setDraftSection(event.target.value);
-    }
+  return (
+    <>
+      <div className="section">
+        <div className="section-header">
+          <h2 className="section-title">{section.title || 'New Section'}</h2>
+          <div className="section-rename">
+            <input
+              type="text"
+              placeholder="Section name"
+              value={draftSection}
+              onChange={handleRenameChange}
+            />
+            <button className="add-section-button" onClick={handleRenameClick}>
+              Rename
+            </button>
+          </div>
+        </div>
 
-    function renameSectionButton() {
-        setSection(draftSection);
-        setDraftSection("");
-    }
+        <div className="tasks-container">
+          {section.tasks &&
+            section.tasks.map((taskItem, index) => {
+              const formattedDate = taskItem.dueDate
+                ? new Date(taskItem.dueDate).toLocaleDateString()
+                : null;
 
-    return (
-        <>
-            <div className="section">
-                <h2>{section}</h2>
-                <input type='text' placeholder='Enter your section name' value={draftSection} onChange={renameSection} />
-                <button className="add-button" onClick={renameSectionButton}>Rename Section</button>
-                <div className='tasks-container'>
-                    {tasks.map((task, index) =>
-                        <div className='tasks-list'>
-                            <button className="check-button" key={index} onClick={() => removeTask(index)}>✅</button>
-                            {task}
-                        </div>
+              return (
+                <div className="tasks-list" key={taskItem.id || index}>
+                  <div className="task-main">
+                    <span className="task-text">{taskItem.text}</span>
+                    {formattedDate && (
+                      <span className="task-date">Due: {formattedDate}</span>
                     )}
+                  </div>
+                  <div className="task-actions">
+                    <button
+                      className="icon-button"
+                      onClick={() => onMoveTaskUp(section.id, index)}
+                      aria-label="Move task up"
+                    >
+                      ↑
+                    </button>
+                    <button
+                      className="icon-button"
+                      onClick={() => onMoveTaskDown(section.id, index)}
+                      aria-label="Move task down"
+                    >
+                      ↓
+                    </button>
+                    <button
+                      className="icon-button delete-task"
+                      onClick={() => onRemoveTask(section.id, index)}
+                      aria-label="Delete task"
+                    >
+                      🗑
+                    </button>
+                    <button
+                      className="icon-button delete-task"
+                      onClick={() => onRemoveTask(section.id, index)}
+                      aria-label="Delete task"
+                    >
+                      ✅
+                    </button>
+                  </div>
                 </div>
-                <input type='text' onChange={addTask} value={task} placeholder='Enter your task' />
-                <button className="add-task" onClick={addTaskButton}>Add Task</button>
-                <div style={{ marginTop: '20px', textAlign: 'center' }}>
-                    <button className="delete-section-button" onClick={onDelete}>Delete Section</button>
-                </div>
-            </div>
-        </>
-    );
+              );
+            })}
+        </div>
+
+        <div className="new-task-row">
+          <input
+            type="text"
+            onChange={handleTaskChange}
+            value={task}
+            placeholder="Enter your task"
+            onKeyDown={handleKeyPress}
+          />
+          <input
+            type="date"
+            value={taskDate}
+            onChange={handleDateChange}
+            className="date-input"
+          />
+          <button className="add-task" onClick={addTaskButton}>
+            Add Task
+          </button>
+        </div>
+
+        <div className="section-footer">
+          <button className="delete-section-button" onClick={onDelete}>
+            Delete Section
+          </button>
+        </div>
+      </div>
+    </>
+  );
 }
+
 export default Section
